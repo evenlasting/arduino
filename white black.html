@@ -1,0 +1,65 @@
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<html>
+<head>
+    <meta charset="gb2312">
+    <title>HelloWorld</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 550);
+        var line = svg.append("line")
+            .attr("x1", 0)
+            .attr("x2", 500)
+            .attr("y1", 500)
+            .attr("y2", 500)
+            .attr("stroke", "black")
+            .attr("stroke-width",2);
+
+        var count = 0;  //延时的时间数
+        var c = 1; //分母
+        var time = new Array();
+        var click = new Array();
+        var rec = new Array();
+        for (var i = 0; i <= 10; i++)
+            rec[i] = svg
+                .append("rect")
+                .attr("id", i)
+            .attr("x", 250)
+            .attr("y", 30)
+            .attr("fill", "black")
+            .attr("width", 40)
+            .attr("style", "cursor:pointer") //change the mouse
+                .attr("height", 70)
+                .on("mousedown", function () { if (this.getAttribute("y") < 500 && this.getAttribute("y") > 430) click[this.getAttribute("id")] = 1;    /*click[rec.attr("num")] = 1; */ });
+        for (var i = 0; i <= 10; i++) {
+            var x = 250, y = 30;
+            
+            //click :means that push and move out
+                rec[i].transition()
+                    .duration(2000 / c)
+                    .ease("line")
+                    .delay(count)
+                    .attr("y", 600);
+            count += 2000 / c;
+            c += count / 2000000;
+            time[i] = count;
+            //console.log(count, c);
+        }
+        setTimeout("ans()",count);
+       // rec[0].
+        function ans() {
+            for (var i = 0; i <= 10; i++) {
+                if (click[i] != 1) break;
+            }
+            alert((i>0)?time[i-1]:0);
+        }
+
+
+    </script>
+    <button onclick="click()">黑块来了</button>
+</body>
+</html>
