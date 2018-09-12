@@ -36,16 +36,16 @@
                 .attr("height", 70)
                 .on("mousedown", function () { if (this.getAttribute("y") < 500 && this.getAttribute("y") > 430) click[this.getAttribute("id")] = 1;    /*click[rec.attr("num")] = 1; */ });
         for (var i = 0; i <= 10; i++) {
-            var x = 250, y = 30;
-            
+            var x = 250, y = 30;         
             //click :means that push and move out
+            count += 2000 / c;
+            c = count / 5000;
                 rec[i].transition()
                     .duration(2000 / c)
                     .ease("line")
                     .delay(count)
                     .attr("y", 600);
-            count += 2000 / c;
-            c += count / 2000000;
+
             time[i] = count;
             //console.log(count, c);
         }
